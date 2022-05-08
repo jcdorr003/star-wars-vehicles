@@ -1,9 +1,15 @@
-import './App.css';
+import './App.scss';
+import VehiclesList from './components/VehiclesList';
+import FilmDetails from './components/FilmDetails';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
-      Star Wars Vehicles
+      <span className="header">Star Wars Vehicles</span>
+      <div className="content-wrapper">
+        <VehiclesList/>
+        <FilmDetails/>
+      </div>
     </div>
   );
 }
