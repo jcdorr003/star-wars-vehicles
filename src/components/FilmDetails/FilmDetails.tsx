@@ -1,5 +1,5 @@
 import React from "react"
-import { IFilmDetails } from "../../types/VehicleType";
+import { IFilmDetails } from "../../types";
 import './FilmDetails.scss';
 
 interface FilmDetailsProps {

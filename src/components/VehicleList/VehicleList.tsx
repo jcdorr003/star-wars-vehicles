@@ -1,15 +1,13 @@
 import React, { MouseEvent } from 'react'
 import './VehicleList.scss';
 import VehicleListItem from '../VehicleListItem';
-import { IVehicle, IFilmDetails } from '../../types/VehicleType';
-import LoadingState from '../LoadingState';
+import { IVehicle, IFilmDetails } from '../../types';
 
 interface VehicleListProps {
   vehicles: IVehicle[],
   handleFilmDetails: (event: MouseEvent, film: IFilmDetails) => void
   handleNextPage: (e: MouseEvent) => void
   handlePreviousPage: (e: MouseEvent) => void
-  isLoading: boolean
 }
 
 const VehiclesList: React.FC<VehicleListProps> = (props) => {
@@ -18,7 +16,6 @@ const VehiclesList: React.FC<VehicleListProps> = (props) => {
     handleFilmDetails, 
     handleNextPage, 
     handlePreviousPage,
-    isLoading
   } = props;
   
   return (
@@ -26,9 +23,6 @@ const VehiclesList: React.FC<VehicleListProps> = (props) => {
       <header className="vehicle-list-header">
         <h3 className="vehicle-list-title">Vehicle List</h3>
       </header>
-      {isLoading ? 
-        <LoadingState/> :
-        <>
         <ul className="vehicle-list">
         {vehicles?.map((vehicle, idx) => {
           return (
@@ -42,8 +36,6 @@ const VehiclesList: React.FC<VehicleListProps> = (props) => {
           <button className="next-button" onClick={(e) => handleNextPage(e)}>Next</button>
         </div>
       </footer>
-      </>
-      }
     </div>
   )
 }

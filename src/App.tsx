@@ -2,7 +2,7 @@ import React, {useState, useEffect, MouseEvent} from 'react';
 import './App.scss';
 import VehicleList from './components/VehicleList';
 import FilmDetails from './components/FilmDetails';
-import { IFilmDetails, IVehicle } from './types/VehicleType';
+import { IFilmDetails, IVehicle } from './types';
 import { getAllVehicles } from './services/VehicleService';
 import {AxiosResponse} from 'axios';
 import { getAllFilms } from './services/FilmService';
@@ -47,7 +47,7 @@ const App: React.FC = () => {
    })
    .then(vehiclesWithFilmData => {
      setVehicles(vehiclesWithFilmData);
-     setIsLoading(false)
+     setIsLoading(false);
    })
   }
 
@@ -90,16 +90,20 @@ const App: React.FC = () => {
         <div className="header">
           <h1 className="title">Star Wars Vehicles</h1>
         </div>
-        <div className="content-wrapper">
-          <VehicleList
-            vehicles={vehicles} 
-            handleFilmDetails={handleFilmDetails}
-            handleNextPage={handleNextPage}
-            handlePreviousPage={handlePreviousPage}
-            isLoading={isLoading}
-          />
-          <FilmDetails film={filmDetails}/>
-        </div>
+        {
+          isLoading ?
+            <LoadingState/> :
+            <div className="content-wrapper">
+              <VehicleList
+                vehicles={vehicles} 
+                handleFilmDetails={handleFilmDetails}
+                handleNextPage={handleNextPage}
+                handlePreviousPage={handlePreviousPage}
+              />
+              <FilmDetails film={filmDetails}/>
+            </div>
+        }
+        
       </div>
     
   );

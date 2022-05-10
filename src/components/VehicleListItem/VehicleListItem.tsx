@@ -1,6 +1,6 @@
 import React, { MouseEvent } from 'react';
 import './VehicleListItem.scss';
-import {IVehicle, IFilmDetails} from '../../types/VehicleType';
+import {IVehicle, IFilmDetails} from '../../types';
 
 interface IVehicleListItemProps {
   vehicle: IVehicle;
