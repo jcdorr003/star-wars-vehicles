@@ -1,0 +1,31 @@
+.vehicle {
+  border: 1px solid lightgrey;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .vehicle-details-container {
+    width: 60%;
+    margin-left: 20px
+  }
+
+  .films-container {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      text-decoration: underline;
+    }
+  }
+  
+  ul {
+    padding: 0;
+    list-style-type: none;
+
+    li {
+      margin: 10px 0;
+      cursor: pointer;
+    }
+  }
+  
+}

@@ -1,6 +1,12 @@
 .film-details-container {
-  border: 1px solid black;
+  // border: 1px solid black;
   display: flex;
-  flex: 1;
-  max-width: 480px;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+
+  .film-details {
+    justify-content: center;
+    margin: 0 50px 0 50px;
+  }
 }

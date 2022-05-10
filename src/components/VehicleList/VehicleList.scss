@@ -1,0 +1,12 @@
+.vehicles-list-container {
+  width: 60%;
+  display: flex;
+
+  .vehicle-list {
+    width: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+  }
+}
