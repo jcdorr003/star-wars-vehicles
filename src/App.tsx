@@ -6,15 +6,17 @@ import { IFilmDetails, IVehicle } from './types/VehicleType';
 import { getAllVehicles } from './services/VehicleService';
 import {AxiosResponse} from 'axios';
 import { getAllFilms } from './services/FilmService';
-import Footer from './components/Footer';
+import LoadingState from './components/LoadingState';
 
 const App: React.FC = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [filmDetails, setFilmDetails] = useState<IFilmDetails>(Object);
   const [nextPage, setNextPage] = useState<string | null>(null);
   const [prevPage, setPrevPage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
+    setIsLoading(true);
     getVehiclesAndFilms();
   }, [])
 
@@ -45,6 +47,7 @@ const App: React.FC = () => {
    })
    .then(vehiclesWithFilmData => {
      setVehicles(vehiclesWithFilmData);
+     setIsLoading(false)
    })
   }
 
@@ -83,14 +86,20 @@ const App: React.FC = () => {
 
   return (
       <div className="App">
+        
         <div className="header">
           <h1 className="title">Star Wars Vehicles</h1>
         </div>
         <div className="content-wrapper">
-          <VehicleList vehicles={vehicles} handleFilmDetails={handleFilmDetails}/>
+          <VehicleList
+            vehicles={vehicles} 
+            handleFilmDetails={handleFilmDetails}
+            handleNextPage={handleNextPage}
+            handlePreviousPage={handlePreviousPage}
+            isLoading={isLoading}
+          />
           <FilmDetails film={filmDetails}/>
         </div>
-        <Footer handleNextPage={handleNextPage} handlePreviousPage={handlePreviousPage}/>
       </div>
     
   );
