@@ -10,7 +10,9 @@ const FilmDetails: React.FC = () => {
     <div className="film-details-container">
       {film.title && (
         <>
-        <h1 className="film-details-header">{film.title}</h1>
+        <div className="film-details-header">
+          <h1 className="film-details-title">{film.title}</h1>
+        </div>
         <div className="film-details">
           <p className="director">Director: {film.director}</p>
           <p className="producer">Producer: {film.producer}</p>

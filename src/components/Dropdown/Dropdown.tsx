@@ -4,15 +4,15 @@ import { VehiclesContextType } from '../../types';
 import './Dropdown.scss';
 
 const Dropdown: React.FC = () => {
-  const {handleCategoryChange} = useContext(VehiclesContext) as VehiclesContextType;
+  const {handleDropdownSelect} = useContext(VehiclesContext) as VehiclesContextType;
   return (
     <div className="filter-container">
-      <div className='filter-description'>Filter by Film:</div>
+      <div className='filter-description'>Filter</div>
       <div>
         <select
-          name="category-list"
-          id="category-list"
-          onChange={handleCategoryChange}
+          name="film-list"
+          id="film-list"
+          onChange={handleDropdownSelect}
         >
           <option value="">All</option>
           <option value="A New Hope">A New Hope</option>

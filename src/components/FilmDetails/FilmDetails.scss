@@ -6,7 +6,11 @@
   width: 40%;
 
   .film-details-header {
-    text-align: center;
+    width: 100%;
+
+    .film-details-title {
+      margin: 0 50px;
+    }
   }
 
   .film-details {

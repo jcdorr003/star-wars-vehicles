@@ -43,6 +43,6 @@ export type VehiclesContextType = {
   handleNextPage: (e: MouseEvent) => void
   handlePreviousPage: (e: MouseEvent) => void
   handleFilmDetails: (event: MouseEvent, film: IFilmDetails) => void
-  handleCategoryChange: (event: { target: { value: React.SetStateAction<string>; }; }) => void
+  handleDropdownSelect: (event: { target: { value: React.SetStateAction<string>; }; }) => void
 }
 

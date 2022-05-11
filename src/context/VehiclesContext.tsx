@@ -18,13 +18,23 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
   const [prevPage, setPrevPage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-
-
+  /**
+   * On mount setIsLoading is set to true to trigger the loading state.
+   * Then getVehiclesAndFilms is called witch handles the api call and building the new vehicle object
+   */
   useEffect(() => {
     setIsLoading(true);
     getVehiclesAndFilms();
   }, [])
 
+  /**
+   * @param params optional params to pass in when calling the api to get next/previous pages
+   * 
+   * This function is a bit complicated but I wanted to try and limit the amount of api calls
+   * by calling all vehicles and all films once and then creating a new vehicle shape that has just the data I need
+   * including the film data associated with instead of just the film URLs. There is some more refactoring 
+   * that I know could be done but this was the solution I came up with for now. 
+   */
   const getVehiclesAndFilms = (params?: string) => {
     Promise.all([getAllVehicles(params), getAllFilms()])
    .then(([vehiclesResp, filmsResp]: AxiosResponse[]) => {
@@ -52,6 +62,13 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
      setVehicles(vehiclesWithFilmData);
      setIsLoading(false);
    })
+   .catch(err => {
+     console.log('error :>> ', err);
+    /**
+     * error would be set in state here to 
+     * trigger an error state for the UI
+     */
+   });
   }
 
   const getFilmDetails = (filmURL: string, films: IFilmDetails[]) => {
@@ -61,8 +78,6 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
 
   const handleNextPage = (e: MouseEvent) => {
     e.preventDefault();
-    console.log('clicked next')
-    console.log('nextPage :>> ', nextPage);
     if (nextPage) {
       const splitURL = nextPage?.split('/');
       const params = splitURL[splitURL.length - 1];
@@ -85,8 +100,7 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
     setFilm(film)
   }
 
-  const handleCategoryChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-    console.log('event :>> ', event.target.value);
+  const handleDropdownSelect = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setFilterCategory(event.target.value);
  }
 
@@ -96,16 +110,8 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
       return vehicles;
     }
 
-    vehicles.filter((vehicle: IVehicle) => {
-      return vehicle.films.filter((film: IFilmDetails) => {
-        if (film.title === filterCategory) {
-          console.log('vehicle :>> ', vehicle);
-          return vehicle;
-        }
-
-      })
-    })
-
+      // Filter logic here
+    
       
   }
 
@@ -121,7 +127,7 @@ const filteredList = useMemo(getFilteredList, [filterCategory, vehicles]);
         handleNextPage,
         handlePreviousPage,
         handleFilmDetails,
-        handleCategoryChange
+        handleDropdownSelect
       }}
     >
       {children}
