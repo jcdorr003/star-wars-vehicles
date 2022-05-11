@@ -1,32 +1,23 @@
-import React, { MouseEvent } from 'react'
+import React, {useContext} from 'react'
 import './VehicleList.scss';
 import VehicleListItem from '../VehicleListItem';
-import { IVehicle, IFilmDetails } from '../../types';
+import { VehiclesContextType } from '../../types';
+import Dropdown from '../Dropdown';
+import { VehiclesContext } from '../../context/VehiclesContext';
 
-interface VehicleListProps {
-  vehicles: IVehicle[],
-  handleFilmDetails: (event: MouseEvent, film: IFilmDetails) => void
-  handleNextPage: (e: MouseEvent) => void
-  handlePreviousPage: (e: MouseEvent) => void
-}
-
-const VehiclesList: React.FC<VehicleListProps> = (props) => {
-  const {
-    vehicles, 
-    handleFilmDetails, 
-    handleNextPage, 
-    handlePreviousPage,
-  } = props;
-  
+const VehiclesList: React.FC = () => {
+  const {vehicles, filteredList, handlePreviousPage, handleNextPage} = useContext(VehiclesContext) as VehiclesContextType;
+  console.log('filteredList :>> ', filteredList);
   return (
     <div className="vehicles-list-container">
       <header className="vehicle-list-header">
         <h3 className="vehicle-list-title">Vehicle List</h3>
+        <Dropdown/>
       </header>
         <ul className="vehicle-list">
         {vehicles?.map((vehicle, idx) => {
           return (
-            <VehicleListItem handleFilmDetails={handleFilmDetails} key={idx+1} vehicle={vehicle}/>
+            <VehicleListItem key={idx+1} vehicle={vehicle}/>
           )
         })}
       </ul>

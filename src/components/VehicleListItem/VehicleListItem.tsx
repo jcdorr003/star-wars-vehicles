@@ -1,15 +1,16 @@
-import React, { MouseEvent } from 'react';
+import React, { useContext } from 'react';
 import './VehicleListItem.scss';
-import {IVehicle, IFilmDetails} from '../../types';
+import {IVehicle, IFilmDetails, VehiclesContextType} from '../../types';
+import { VehiclesContext } from '../../context/VehiclesContext';
 
 interface IVehicleListItemProps {
   vehicle: IVehicle;
-  handleFilmDetails: (event: MouseEvent, film: IFilmDetails) => void;
 }
 
-const VehicleListItem: React.FC<IVehicleListItemProps> = ({vehicle, handleFilmDetails}) => {
-  
-  const renderTitleList = vehicle.films.map((film: IFilmDetails) => {
+const VehicleListItem: React.FC<IVehicleListItemProps> = ({vehicle}) => {
+  const {handleFilmDetails} = useContext(VehiclesContext) as VehiclesContextType;
+
+  const renderFilmList = vehicle.films.map((film: IFilmDetails) => {
     return <li key={film.episode_id} onClick={(e) => handleFilmDetails(e, film)}>{film.title}</li>
   })
 
@@ -22,7 +23,7 @@ const VehicleListItem: React.FC<IVehicleListItemProps> = ({vehicle, handleFilmDe
       </div>
       <div className="films-container">
         <span className="title">Films</span>
-        <ul className="film-list">{renderTitleList}</ul>
+        <ul className="film-list">{renderFilmList}</ul>
       </div>
         
     </li>

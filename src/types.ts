@@ -1,3 +1,4 @@
+import { MouseEvent } from "react"
 export interface IVehicle {
   cargo_capacity?: string,
   consumables?: string,
@@ -34,8 +35,14 @@ export interface IFilmDetails {
   vehicles: string[]
 }
 
-export type VehicleContextType = {
+export type VehiclesContextType = {
   vehicles: IVehicle[],
-  getVehicleFilmDetails: (filmURL: string) => IFilmDetails
+  filteredList?: IVehicle[],
+  film: IFilmDetails
+  isLoading: boolean
+  handleNextPage: (e: MouseEvent) => void
+  handlePreviousPage: (e: MouseEvent) => void
+  handleFilmDetails: (event: MouseEvent, film: IFilmDetails) => void
+  handleCategoryChange: (event: { target: { value: React.SetStateAction<string>; }; }) => void
 }
 
