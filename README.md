@@ -3,6 +3,7 @@
 ## Running Application
 
 npm install
+
 npm run start
 
 ## User Flow
