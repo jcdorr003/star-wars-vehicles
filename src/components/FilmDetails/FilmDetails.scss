@@ -12,5 +12,17 @@
   .film-details {
     justify-content: center;
     margin: 0 50px 0 50px;
+
+    .poster-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+      img {
+        width: 50%;
+
+      }
+    }
+    
   }
 }

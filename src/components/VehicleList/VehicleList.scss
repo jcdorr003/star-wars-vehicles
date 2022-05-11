@@ -4,7 +4,10 @@
   flex-direction: column;
 
   .vehicle-list-header {
-    min-height: 40px;
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    padding: 0 20px;
     .vehicle-list-title {
       margin: 0;
     }
