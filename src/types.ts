@@ -37,7 +37,7 @@ export interface IFilmDetails {
 
 export type VehiclesContextType = {
   vehicles: IVehicle[],
-  filteredList?: IVehicle[],
+  filteredVehicles?: IVehicle[],
   film: IFilmDetails
   isLoading: boolean
   handleNextPage: (e: MouseEvent) => void

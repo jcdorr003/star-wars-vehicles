@@ -7,8 +7,8 @@ import { VehiclesContext } from '../../context/VehiclesContext';
 import LoadingState from '../LoadingState';
 
 const VehiclesList: React.FC = () => {
-  const {isLoading, vehicles, handlePreviousPage, handleNextPage} = useContext(VehiclesContext) as VehiclesContextType;
-
+  const {isLoading, filteredVehicles, handlePreviousPage, handleNextPage} = useContext(VehiclesContext) as VehiclesContextType;
+  
   return (
     <div className="vehicles-list-container">
       <header className="vehicle-list-header">
@@ -18,7 +18,7 @@ const VehiclesList: React.FC = () => {
       {isLoading ?
         <LoadingState/> :
         <ul className="vehicle-list">
-          {vehicles?.map((vehicle, idx) => {
+          {filteredVehicles?.map((vehicle, idx) => {
             return (
               <VehicleListItem key={idx+1} vehicle={vehicle}/>
             )

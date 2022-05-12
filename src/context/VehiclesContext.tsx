@@ -104,24 +104,28 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
     setFilterCategory(event.target.value);
  }
 
- // Filter functionality still in work
   const getFilteredList = () => {
     if (filterCategory === '') {
       return vehicles;
     }
 
-      // Filter logic here  
+      const filteredVehicles = vehicles.filter((vehicle: IVehicle) => {
+        return vehicle.films.find((film: IFilmDetails) => {
+          return film.title === filterCategory
+        })
+      })
     
+    return filteredVehicles;
       
   }
 
-const filteredList = useMemo(getFilteredList, [filterCategory, vehicles]);
+const filteredVehicles = useMemo(getFilteredList, [filterCategory, vehicles]);
 
   return (
     <VehiclesContext.Provider
       value={{
         vehicles,
-        filteredList,
+        filteredVehicles,
         film,
         isLoading,
         handleNextPage,
