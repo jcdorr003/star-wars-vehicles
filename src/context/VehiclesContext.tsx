@@ -111,12 +111,6 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
     }
 
       // Filter logic here  
-      vehicles.filter((vehicle) => {
-        vehicle.films.forEach((film: IFilmDetails) => {
-          
-          
-        })
-      })
     
       
   }
