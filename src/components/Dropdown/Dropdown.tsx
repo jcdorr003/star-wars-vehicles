@@ -4,6 +4,9 @@ import { VehiclesContextType } from '../../types';
 import './Dropdown.scss';
 
 const Dropdown: React.FC = () => {
+  /**
+   * This component will become a reusable component for both the sorting and filtering selection
+   */
   const {handleDropdownSelect} = useContext(VehiclesContext) as VehiclesContextType;
   return (
     <div className="filter-container">
