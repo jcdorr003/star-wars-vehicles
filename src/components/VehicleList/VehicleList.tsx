@@ -20,7 +20,7 @@ const VehiclesList: React.FC = () => {
         <ul className="vehicle-list">
           {filteredVehicles?.map((vehicle, idx) => {
             return (
-              <VehicleListItem key={idx+1} vehicle={vehicle}/>
+              <VehicleListItem key={idx} vehicle={vehicle}/>
             )
           })}
         </ul>
