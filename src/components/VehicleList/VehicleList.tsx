@@ -7,7 +7,7 @@ import { VehiclesContext } from '../../context/VehiclesContext';
 import LoadingState from '../LoadingState';
 
 const VehiclesList: React.FC = () => {
-  const {isLoading, filteredVehicles, handlePreviousPage, handleNextPage} = useContext(VehiclesContext) as VehiclesContextType;
+  const {isLoading, filteredVehicles, handlePreviousPage, handleNextPage, prevPage, nextPage} = useContext(VehiclesContext) as VehiclesContextType;
   
   return (
     <div className="vehicles-list-container">
@@ -27,8 +27,8 @@ const VehiclesList: React.FC = () => {
       }
       <footer className="vehicle-list-footer">
         <div className="button-container">
-          <button className="previous-button" onClick={(e) => handlePreviousPage(e)}>Previous</button>
-          <button className="next-button" onClick={(e) => handleNextPage(e)}>Next</button>
+          {prevPage && <button className="previous-button" onClick={(e) => handlePreviousPage(e)}>Previous</button>}
+          {nextPage && <button className="next-button" onClick={(e) => handleNextPage(e)}>Next</button>}
         </div>
       </footer>
     </div>

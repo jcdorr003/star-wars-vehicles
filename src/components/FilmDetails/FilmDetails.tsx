@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { VehiclesContextType } from "../../types";
 import './FilmDetails.scss';
 import { VehiclesContext } from "../../context/VehiclesContext";
@@ -8,7 +8,7 @@ const FilmDetails: React.FC = () => {
 
   return (
     <div className="film-details-container">
-      {film.title && (
+      {film?.title && (
         <>
         <div className="film-details-header">
           <h1 className="film-details-title">{film.title}</h1>

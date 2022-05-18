@@ -13,7 +13,7 @@ export const VehiclesContext = createContext<VehiclesContextType | null>(null);
 export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [filterCategory, setFilterCategory] = useState<string>('')
-  const [film, setFilm] = useState<IFilmDetails>(Object);
+  const [film, setFilm] = useState<IFilmDetails | null>(null);
   const [nextPage, setNextPage] = useState<string | null>(null);
   const [prevPage, setPrevPage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -23,7 +23,6 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
    * Then getVehiclesAndFilms is called witch handles the api call and building the new vehicle object
    */
   useEffect(() => {
-    setIsLoading(true);
     getVehiclesAndFilms();
   }, [])
 
@@ -36,6 +35,7 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
    * that I know could be done but this was the solution I came up with for now. 
    */
   const getVehiclesAndFilms = (params?: string) => {
+    setIsLoading(true);
     Promise.all([getAllVehicles(params), getAllFilms()])
    .then(([vehiclesResp, filmsResp]: AxiosResponse[]) => {
      setNextPage(vehiclesResp.data.next)
@@ -78,6 +78,7 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
 
   const handleNextPage = (e: MouseEvent) => {
     e.preventDefault();
+    setFilm(null);
     if (nextPage) {
       const splitURL = nextPage?.split('/');
       const params = splitURL[splitURL.length - 1];
@@ -88,6 +89,7 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
 
   const handlePreviousPage = (e: MouseEvent) => {
     e.preventDefault();
+    setFilm(null);
     if (prevPage) {
       const splitURL = prevPage?.split('/');
       const params = splitURL[splitURL.length - 1];
@@ -128,6 +130,8 @@ const filteredVehicles = useMemo(getFilteredList, [filterCategory, vehicles]);
         filteredVehicles,
         film,
         isLoading,
+        prevPage,
+        nextPage,
         handleNextPage,
         handlePreviousPage,
         handleFilmDetails,

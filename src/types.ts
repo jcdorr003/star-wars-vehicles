@@ -38,8 +38,10 @@ export interface IFilmDetails {
 export type VehiclesContextType = {
   vehicles: IVehicle[],
   filteredVehicles?: IVehicle[],
-  film: IFilmDetails
-  isLoading: boolean
+  film: IFilmDetails | null,
+  isLoading: boolean,
+  prevPage: string | null,
+  nextPage: string | null,
   handleNextPage: (e: MouseEvent) => void
   handlePreviousPage: (e: MouseEvent) => void
   handleFilmDetails: (event: MouseEvent, film: IFilmDetails) => void
