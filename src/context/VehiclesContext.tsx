@@ -71,7 +71,7 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
    });
   }
 
-  const getFilmDetails = (filmURL: string, films: IFilmDetails[]) => {
+  const getFilmDetails = (filmURL: string, films: IFilmDetails[]): IFilmDetails | null => {
     const film = films.find((film: IFilmDetails) => film.url === filmURL);
     return film ? film : null;
   }
@@ -106,7 +106,7 @@ export const VehiclesProvider: React.FC<IVehicleProviderProps> = ({ children }) 
     setFilterCategory(event.target.value);
  }
 
-  const getFilteredList = () => {
+  const getFilteredList = (): IVehicle[] => {
     if (filterCategory === '') {
       return vehicles;
     }
