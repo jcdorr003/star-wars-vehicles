@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import { VehiclesContextType } from "../../types";
 import './FilmDetails.scss';
 import { VehiclesContext } from "../../context/VehiclesContext";
